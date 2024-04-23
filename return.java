@@ -1,7 +1,7 @@
 import java.util.Scanner;
 
 public class Return  {
-    // An array that contains registered students' usernames and associated passwords
+    // An array that contains registered students' usernames and associated passwords, ISBNS
     private String[] usernames = { "ali", "yousif", "fatima" };
     private String[] passwords = { "password1", "password2", "password3" };
     private String[] ISBN = { "12345", "55543", "67890" };
