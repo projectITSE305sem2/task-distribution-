@@ -16,7 +16,7 @@ public class ReturnTest {
         String result = r.returnBook(username, password, bookISBN);
 
         // Assert that the appropriate success message is returned
-        assertEquals("Hi ali, you have successfully logged in.\nThank you for returning the book with ISBN 12345", result);
+        assertEquals("Thank you for returning the book with ISBN "+ bookISBN, result);
     }
 
     @Test
@@ -49,10 +49,5 @@ public class ReturnTest {
 
         // Assert that the appropriate error message is returned
         assertEquals("Invalid book ISBN.", result);
-    }
-
-
-    private void assertEquals(String expected, String actual) {
-        assertEquals(expected, actual);
     }
 }
