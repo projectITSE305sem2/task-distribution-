@@ -1,50 +1,69 @@
-import java.util.*;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
-public class SearchBook {
+import java.util.LinkedList;
 
-    public static void main(String[] args) {
-        Scanner kb = new Scanner(System.in);
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
-        // Sample books
-        ArrayList<Book> booksList = new ArrayList<>();
+class SearchBookTest {
+    private LinkedList<Book> booksList;
+
+    @BeforeEach
+    void setUp() {
+        booksList = new LinkedList<>();
         Book b1 = new Book("To Kill a Mockingbird", "Harper Lee", "", "J.B Lippincott & Co", "9780446310789", 1000, 1960);
         Book b2 = new Book("Pride and Prejudice", "Jane Austen", "", "T. Egerton, Whitehall", "9780141439518", 1001, 1813);
         Book b3 = new Book("The Great Gatsby", "F.Scott Fitzgerald", "", "Charles Scribner's Sons", "9780743273565", 1002, 1925);
-        booksList.add(b1);
-        booksList.add(b2);
-        booksList.add(b3);
+        booksList.addLast(b1);
+        booksList.addLast(b2);
+        booksList.addLast(b3);
+    }
 
-        // Ask user what parameter he wants to search by (Title or author or ISBN)
-        System.out.println("What will you use to search? (Title/Author/ISBN)");
-        String method = kb.nextLine();
+    @AfterEach
+    void tearDown() {
+        // Clean up any resources after each test, if required
+    }
 
-        // Validate the search method input
-        if (!method.equalsIgnoreCase("Title") && !method.equalsIgnoreCase("Author") && !method.equalsIgnoreCase("ISBN")) {
-            System.out.println("Invalid search method. Please enter a valid search method.");
-            return;
-        }
+    @Test
+    void searchByTitleTest() {
+        String targetTitle = "The Great Gatsby";
+        String expected = "The Great Gatsby - F.Scott Fitzgerald";
 
-        System.out.println("Enter " + method);
-        String input = kb.nextLine();
+        String result = searchAndGetResult(targetTitle);
+        assertEquals(expected, result, "Search by title failed");
+    }
 
-        // Perform the search using the enhanced for loop
-        boolean found = false;
+    @Test
+    void searchByAuthorTest() {
+        String targetAuthor = "F.Scott Fitzgerald";
+        String expected = "The Great Gatsby - F.Scott Fitzgerald";
+
+        String result = searchAndGetResult(targetAuthor);
+        assertEquals(expected, result, "Search by author failed");
+    }
+
+    @Test
+    void searchByISBNTest() {
+        String targetISBN = "9780743273565";
+        String expected = "The Great Gatsby - F.Scott Fitzgerald";
+
+        String result = searchAndGetResult(targetISBN);
+        assertEquals(expected, result, "Search by ISBN failed");
+    }
+
+    private String searchAndGetResult(String targetValue) {
+        String result = "not found";
+
         for (Book book : booksList) {
-            if (method.equalsIgnoreCase("Title") && book.getTitle().equalsIgnoreCase(input)) {
-                System.out.println(book);
-                found = true;
-            } else if (method.equalsIgnoreCase("Author") && book.getAuthor1().equalsIgnoreCase(input)) {
-                System.out.println(book);
-                found = true;
-            } else if (method.equalsIgnoreCase("ISBN") && book.getIsbn().equalsIgnoreCase(input)) {
-                System.out.println(book);
-                found = true;
+            if (book.getTitle().equalsIgnoreCase(targetValue)
+                    || book.getAuthor1().equalsIgnoreCase(targetValue)
+                    || book.getIsbn().equalsIgnoreCase(targetValue)) {
+                result = book.getTitle() + " - " + book.getAuthor1();
+                break;
             }
         }
 
-        // Display message if no books are found
-        if (!found) {
-            System.out.println("No books found matching the search criteria.");
-        }
+        return result;
     }
 }
