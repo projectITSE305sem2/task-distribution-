@@ -5,23 +5,28 @@ import java.util.Scanner;
 
 // SignIn class
 public class SignIn {
-    // our data/attributes values
-    private String[] usernames = { "ali", "yousif", "fatima" };
-    private String[] passwords = { "password1", "password2", "password3" };
+    // our data/attributes values stored in ArrayLists
+    private ArrayList<String> usernames = new ArrayList<>(Arrays.asList("ali", "yousif", "fatima"));
+    private ArrayList<String> passwords = new ArrayList<>(Arrays.asList("password1", "password2", "password3"));
 
     // method to verification ( check user inputs)
     public boolean authenticate(String username, String password) {
-        // Logic to authenticate the user
-        // Check if the username and password match the stored values
-
-        for (int i = 0; i < usernames.length; i++) {
-            if (username.equals(usernames[i]) && password.equals(passwords[i])) {
-                return true; // Authentication successful
+        for (int i = 0; i < usernames.size(); i++) {
+            if (username.equals(usernames.get(i)) && password.equals(passwords.get(i))) {
+                return true;
             }
         }
-        return false; // Authentication failed
+        return false;
     }
 
+    // Method to add a new user (remains protected)
+    protected void addUser(String username, String password) {
+        usernames.add(username);
+        passwords.add(password);
+        System.out.println("User added successfully!");
+    }
+
+    // Method for user sign-in
     // method to ask the user to enter her/his username and password to Sign in to
     // the system, system will pop up a successful/failed message, depend on user
     // inputs
@@ -42,16 +47,16 @@ public class SignIn {
             System.out.println("Sign in failed. Invalid username or password.");
         }
 
-        userInput.close(); // closing
+        userInput.close();
     }
 
     // Main class, to excute/run the code we call the method
-    // here we call SignIn.userSignIn() that will propote the user to enter her/his
+    // here we call signIn.userSignIn() that will propote the user to enter her/his
     // username and password,
     // then check for verification. finally, a message will appears
     // (successful/failed )
     public static void main(String[] args) {
         SignIn signIn = new SignIn();
-        signIn.userSignIn();
+        signIn.userSignIn(); // User sign-in
     }
 }

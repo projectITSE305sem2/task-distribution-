@@ -1,12 +1,14 @@
 import java.util.Scanner;
 
-public class Return  {
-    // An array that contains registered students' usernames and associated passwords, ISBNS
+public class Return {
+    // An array that contains registered students' usernames and associated
+    // passwords, ISBNS
     private String[] usernames = { "ali", "yousif", "fatima" };
     private String[] passwords = { "password1", "password2", "password3" };
     private String[] ISBN = { "12345", "55543", "67890" };
 
-    public Return() {}
+    public Return() {
+    }
 
     public boolean login(String username, String password) {
         for (int i = 0; i < usernames.length; i++) {
@@ -25,7 +27,7 @@ public class Return  {
         }
 
         // Check if payment is zero (assuming it's stored somewhere)
-        double payment = getPayment(username);  // Replace with your payment retrieval logic
+        double payment = getPayment(username); // Replace with your payment retrieval logic
         if (payment != 0) {
             System.out.println("Please settle your payment before returning a book.");
             return;
@@ -48,10 +50,12 @@ public class Return  {
         }
     }
 
-    // payment method have to be implemented, we have the case where when the book due date is passed
+    // payment method have to be implemented, we have the case where when the book
+    // due date is passed
     // then there is an amount of money that have to be paid by the user
     private double getPayment(String username) {
-        // the method should be implemented and we have to integrate the different ways of paying online
+        // the method should be implemented and we have to integrate the different ways
+        // of paying online
         return 0.0;
     }
 
